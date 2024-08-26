@@ -1,7 +1,30 @@
+using DotNetEnv;
+using Newtonsoft.Json;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Load environment variables from .env file
+DotNetEnv.Env.Load();
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSingleton(provider =>
+{
+    var firebaseConfig = new
+    {
+        apiKey = Environment.GetEnvironmentVariable("FIREBASE_API_KEY"),
+        authDomain = Environment.GetEnvironmentVariable("FIREBASE_AUTH_DOMAIN"),
+        projectId = Environment.GetEnvironmentVariable("FIREBASE_PROJECT_ID"),
+        storageBucket = Environment.GetEnvironmentVariable("FIREBASE_STORAGE_BUCKET"),
+        messagingSenderId = Environment.GetEnvironmentVariable("FIREBASE_MESSAGING_SENDER_ID"),
+        appId = Environment.GetEnvironmentVariable("FIREBASE_APP_ID"),
+        measurementId = Environment.GetEnvironmentVariable("FIREBASE_MEASUREMENT_ID")
+    };
+
+    return Newtonsoft.Json.JsonConvert.SerializeObject(firebaseConfig);
+});
 
 var app = builder.Build();
 

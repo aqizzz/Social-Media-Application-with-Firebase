@@ -1,18 +1,39 @@
-﻿<!DOCTYPE html>
+﻿@inject string FirebaseConfig
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Social_Media_Application_with_Firebase</title>
+    <title>@ViewData["Title"] - Social-Media-Application-with-Firebase</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Social_Media_Application_with_Firebase.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Social-Media-Application-with-Firebase.styles.css" asp-append-version="true" />
+
+    <script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js"></script>
+
+    <script>
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
+        import { getauth } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js";
+
+        const firebaseConfig = @Html.Raw(FirebaseConfig);
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getauth(app);
+
+        //check if currentuserexist then I hide that 2 li
+    </script>
+
+    <script>
+        console.log("Firebase API Key: @Environment.GetEnvironmentVariable("FIREBASE_API_KEY")");
+    </script>
+
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Social_Media_Application_with_Firebase</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Social-Media-Application-with-Firebase</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -38,7 +59,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - Social_Media_Application_with_Firebase - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - Social-Media-Application-with-Firebase - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

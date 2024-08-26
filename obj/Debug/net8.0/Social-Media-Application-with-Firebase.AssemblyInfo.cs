@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Social-Media-Application-with-Firebase")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7443c6d8c93458ea358e85e6e520853b660e0866")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+958ff3573d2bfdf59d74e4899f87a9fe262ae337")]
 [assembly: System.Reflection.AssemblyProductAttribute("Social-Media-Application-with-Firebase")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Social-Media-Application-with-Firebase")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

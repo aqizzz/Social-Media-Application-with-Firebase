@@ -28,14 +28,5 @@ namespace Social_Media_Application_with_Firebase.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        public IActionResult Signup()
-        {
-            return View("~/Views/Auth/Signup.cshtml");
-        }
-
-        public IActionResult Login()
-        {
-            return View("~/Views/Auth/Login.cshtml");
-        }
     }
 }

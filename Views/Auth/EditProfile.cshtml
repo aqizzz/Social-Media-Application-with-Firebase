@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Edit Profile";
+}
+
+<script src="~/js/auth/editProfile.js" type="module" defer></script>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-xl-5">
+            <div class="card my-5 shadow-lg border-0">
+                <div class="card-body m-3">
+                    <h2 class="card-title text-center text-primary">Edit Profile</h2>
+
+                    <div class="d-flex justify-content-center align-items-center my-4">
+                        <img id="profilePicture" src="" alt="Profile Picture" class="rounded-circle border" style="display:none; width:200px; height:200px;" />
+                    </div>
+
+                    <form id="editProfileForm" class="d-flex flex-column gap-3">
+                        <div class="form-group">
+                            <label for="name" class="fw-bold">Name:</label>
+                            <input type="text" id="name" class="form-control" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="fw-bold">Email:</label>
+                            <input type="email" id="email" class="form-control" required disabled />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bio" class="fw-bold">Bio:</label>
+                            <textarea id="bio" class="form-control"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fileInput" class="fw-bold">Profile Picture:</label>
+                            <input type="file" id="fileInput" class="form-control" />
+                        </div>
+
+                        <div class="text-center my-4">
+                            <a href="/Auth/ChangePassword" class="text-primary">Change Password</a>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 col-sm-6 mb-3 mb-sm-0">
+                                <a class="btn btn-secondary w-100" type="button" href="/Auth/ViewProfile">Cancel</a>
+                            </div>
+
+                            <div class="col-12 col-sm-6">
+                                <button class="btn btn-primary w-100" type="button" id="updateProfileButton">Update Profile</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

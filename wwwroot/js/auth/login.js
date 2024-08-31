@@ -30,6 +30,9 @@ form.addEventListener('submit', function (event) {
                     case 'auth/invalid-credential':
                         errAlert.textContent = 'Invalid email or password.'
                         break;
+                    case 'auth/too-many-requests':
+                        errAlert.textContent = 'Too many failed login attempts. Please try again later.';
+                        break;
                     default:
                         errAlert.textContent = 'An error occurred.';
                         break;

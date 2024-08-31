@@ -30,22 +30,23 @@
                         </li>
                     </ul>
 
-                    <ul class="navbar-nav auth" id="authNav">
+                    <ul class="navbar-nav guestEl" style="display: none;">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Signup">Sign Up</a>
+                            <a class="nav-link" asp-controller="Auth" asp-action="Signup">Sign Up</a>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Login">Login</a>
+                            <a class="nav-link" asp-controller="Auth" asp-action="Login">Login</a>
                         </li>
                     </ul>
 
-                    <ul class="navbar-nav" id="logoutNav" style="display: none;">
+                    <ul class="navbar-nav authenticatedEl" style="display: none;">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="userDropdown">
-                                
+                                &nbsp;
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-controller="Home" asp-action="Profile">Profile</a></li>
+                                <li><a class="dropdown-item" asp-controller="Auth" asp-action="ViewProfile">Profile</a></li>
                                 <li><a class="dropdown-item" id="logoutBtn" asp-controller="Home" asp-action="Index">Logout</a></li>
                             </ul>
                         </li>

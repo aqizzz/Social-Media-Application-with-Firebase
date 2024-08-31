@@ -2,9 +2,33 @@
     ViewData["Title"] = "Home Page";
 }
 
-@*if (getAuth.getCurrentuser)==null*@
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <br />
+<div class="text-center container my-5 guestEl d-none">
+    <h1 class="display-4 mb-5 fw-bold">Welcome</h1>
 
+    <div class="row col-12 col-md-6 mx-auto">
+        <div class="col-12 col-sm-6 mb-3 mb-sm-0">
+            <a class="btn btn-outline-primary btn-lg w-100" type="button" asp-route="login">Login</a>
+        </div>
+
+        <div class="col-12 col-sm-6">
+            <a class="btn btn-primary btn-lg w-100" type="button" asp-route="signup">Sign Up</a>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/posts/feed.js" type="module" defer></script>
+
+<div class="container my-5 authenticatedEl d-none">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="text-primary">Your Feed</h2>
+                <a class="btn btn-outline-primary" type="button" asp-route="createPost">Create a Post</a>
+            </div>
+
+            <div id="postsFeed" class="posts-container">
+                <!-- Feed posts -->
+            </div>
+        </div>
+    </div>
 </div>

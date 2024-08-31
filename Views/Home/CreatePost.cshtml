@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Create Post";
+}
+
+<script src="~/js/posts/createPost.js" type="module" defer></script>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-body m-3">
+                    <h2 class="card-title text-center text-primary mb-4">Create Post</h2>
+
+                    <form id="createPostForm" class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="postContent" class="form-label fw-bold">Post Content:</label>
+                            <textarea id="postContent" class="form-control" rows="4" required></textarea>
+                            <div class="invalid-feedback">
+                                Please enter some content for your post.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="postImage" class="form-label fw-bold">Image (optional):</label>
+                            <input type="file" id="postImage" class="form-control" accept="image/*">
+                        </div>
+
+                        <div class="row pt-4">
+                            <div class="col-12 col-sm-6 mb-3 mb-sm-0">
+                                <a class="btn btn-secondary w-100" type="button" href="/">Cancel</a>
+                            </div>
+
+                            <div class="col-12 col-sm-6">
+                                <button type="submit" class="btn btn-primary w-100">Create Post</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

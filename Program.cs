@@ -44,6 +44,41 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllerRoute(
+    name: "createPost",
+    pattern: "posts/create",
+    defaults: new { controller = "Home", action = "CreatePost" });
+
+app.MapControllerRoute(
+    name: "postDetail",
+    pattern: "posts/post",
+    defaults: new { controller = "Home", action = "PostDetail" });
+
+app.MapControllerRoute(
+    name: "viewProfile",
+    pattern: "profile",
+    defaults: new { controller = "Auth", action = "ViewProfile" });
+
+app.MapControllerRoute(
+    name: "editProfile",
+    pattern: "profile/edit",
+    defaults: new { controller = "Auth", action = "EditProfile" });
+
+app.MapControllerRoute(
+    name: "changePwd",
+    pattern: "profile/edit/changePassword",
+    defaults: new { controller = "Auth", action = "ChangePassword" });
+
+app.MapControllerRoute(
+    name: "login",
+    pattern: "login",
+    defaults: new { controller = "Auth", action = "Login" });
+
+app.MapControllerRoute(
+    name: "signup",
+    pattern: "signup",
+    defaults: new { controller = "Auth", action = "Signup" });
+
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 

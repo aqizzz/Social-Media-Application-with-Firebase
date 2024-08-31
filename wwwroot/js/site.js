@@ -17,13 +17,13 @@ function checkAuthState() {
 
 function hideElement(el) {
     if (el) {
-        el.style.display = 'none';
+        el.classList.add('d-none');
     }
 }
 
 function showElement(el) {
     if (el) {
-        el.style.display = '';
+        el.classList.remove('d-none');
     }
 }
 

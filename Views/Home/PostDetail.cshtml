@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Post Details";
+}
+
+<script src="~/js/posts/postDetail.js" type="module" defer></script>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div id="postDetails" class="card">
+                <!-- Post details -->
+            </div>
+            <div class="mt-4">
+                <h4>Comments</h4>
+                <form id="commentForm" class="mb-3">
+                    <div class="mb-3">
+                        <textarea id="commentContent" class="form-control" rows="2" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Comment</button>
+                </form>
+                <div id="commentsList">
+                    <!-- Comments -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

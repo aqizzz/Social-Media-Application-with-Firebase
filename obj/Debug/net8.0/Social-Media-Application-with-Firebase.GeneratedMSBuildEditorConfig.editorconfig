@@ -9,47 +9,59 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Social_Media_Application_with_Firebase
 build_property.RootNamespace = Social_Media_Application_with_Firebase
-build_property.ProjectDir = D:\study\John Abbot\Application Development II\Social-Media-Application-with-Firebase\
+build_property.ProjectDir = D:\study\John Abbot\Application Development II\Social-Media-Application-with-Firebase-new\Social-Media-Application-with-Firebase\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\study\John Abbot\Application Development II\Social-Media-Application-with-Firebase
+build_property.MSBuildProjectDirectory = D:\study\John Abbot\Application Development II\Social-Media-Application-with-Firebase-new\Social-Media-Application-with-Firebase
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/study/John Abbot/Application Development II/Social-Media-Application-with-Firebase/Views/Auth/Login.cshtml]
+[D:/study/John Abbot/Application Development II/Social-Media-Application-with-Firebase-new/Social-Media-Application-with-Firebase/Views/Auth/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxDaGFuZ2VQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/study/John Abbot/Application Development II/Social-Media-Application-with-Firebase-new/Social-Media-Application-with-Firebase/Views/Auth/EditProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxFZGl0UHJvZmlsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/study/John Abbot/Application Development II/Social-Media-Application-with-Firebase-new/Social-Media-Application-with-Firebase/Views/Auth/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/study/John Abbot/Application Development II/Social-Media-Application-with-Firebase/Views/Auth/Signup.cshtml]
+[D:/study/John Abbot/Application Development II/Social-Media-Application-with-Firebase-new/Social-Media-Application-with-Firebase/Views/Auth/Signup.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxTaWdudXAuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/study/John Abbot/Application Development II/Social-Media-Application-with-Firebase/Views/Home/Index.cshtml]
+[D:/study/John Abbot/Application Development II/Social-Media-Application-with-Firebase-new/Social-Media-Application-with-Firebase/Views/Auth/ViewProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxWaWV3UHJvZmlsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/study/John Abbot/Application Development II/Social-Media-Application-with-Firebase-new/Social-Media-Application-with-Firebase/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/study/John Abbot/Application Development II/Social-Media-Application-with-Firebase/Views/Home/Privacy.cshtml]
+[D:/study/John Abbot/Application Development II/Social-Media-Application-with-Firebase-new/Social-Media-Application-with-Firebase/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/study/John Abbot/Application Development II/Social-Media-Application-with-Firebase/Views/Shared/Error.cshtml]
+[D:/study/John Abbot/Application Development II/Social-Media-Application-with-Firebase-new/Social-Media-Application-with-Firebase/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/study/John Abbot/Application Development II/Social-Media-Application-with-Firebase/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/study/John Abbot/Application Development II/Social-Media-Application-with-Firebase-new/Social-Media-Application-with-Firebase/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/study/John Abbot/Application Development II/Social-Media-Application-with-Firebase/Views/_ViewImports.cshtml]
+[D:/study/John Abbot/Application Development II/Social-Media-Application-with-Firebase-new/Social-Media-Application-with-Firebase/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/study/John Abbot/Application Development II/Social-Media-Application-with-Firebase/Views/_ViewStart.cshtml]
+[D:/study/John Abbot/Application Development II/Social-Media-Application-with-Firebase-new/Social-Media-Application-with-Firebase/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/study/John Abbot/Application Development II/Social-Media-Application-with-Firebase/Views/Shared/_Layout.cshtml]
+[D:/study/John Abbot/Application Development II/Social-Media-Application-with-Firebase-new/Social-Media-Application-with-Firebase/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-d141q2zc1y

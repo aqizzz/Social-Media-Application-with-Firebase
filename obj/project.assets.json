@@ -4792,11 +4792,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\study\\John Abbot\\Application Development II\\Social-Media-Application-with-Firebase\\Social-Media-Application-with-Firebase.csproj",
+      "projectUniqueName": "D:\\study\\John Abbot\\Application Development II\\Social-Media-Application-with-Firebase-new\\Social-Media-Application-with-Firebase\\Social-Media-Application-with-Firebase.csproj",
       "projectName": "Social-Media-Application-with-Firebase",
-      "projectPath": "D:\\study\\John Abbot\\Application Development II\\Social-Media-Application-with-Firebase\\Social-Media-Application-with-Firebase.csproj",
+      "projectPath": "D:\\study\\John Abbot\\Application Development II\\Social-Media-Application-with-Firebase-new\\Social-Media-Application-with-Firebase\\Social-Media-Application-with-Firebase.csproj",
       "packagesPath": "C:\\Users\\aqizzz\\.nuget\\packages\\",
-      "outputPath": "D:\\study\\John Abbot\\Application Development II\\Social-Media-Application-with-Firebase\\obj\\",
+      "outputPath": "D:\\study\\John Abbot\\Application Development II\\Social-Media-Application-with-Firebase-new\\Social-Media-Application-with-Firebase\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "E:\\Tools\\Microsoft Visual Studio\\Shared\\NuGetPackages"

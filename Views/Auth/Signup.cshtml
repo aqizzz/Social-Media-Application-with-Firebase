@@ -4,41 +4,81 @@
 }
 <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js';
-     import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.1.3/firebase-auth.js';
+    import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.1.3/firebase-auth.js';
+    import { getDatabase, ref, push, set } from 'https://www.gstatic.com/firebasejs/9.1.3/firebase-database.js';
 
     const firebaseConfig = @Html.Raw(FirebaseConfig);
-         const app = initializeApp(firebaseConfig);
-         const auth = getAuth(app);
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const database = getDatabase(app);
 
 
-     document.getElementById("signupForm").addEventListener("submit", function (event) {
-         event.preventDefault();
+    document.getElementById("signupForm").addEventListener("submit", function (event) {
+        event.preventDefault();  
+        
+        const email = document.getElementById("signupEmail").value;
+        const password = document.getElementById("signupPassword").value;
 
-         const email = document.getElementById("signupEmail").value;
-         const password = document.getElementById("signupPassword").value;
-
-         createUserWithEmailAndPassword(auth, email, password)
-             .then((userCredential) => {
-
-                 alert("Sign up successful");
-                 window.location.href = "/Home";
-             })
-             .catch((error) => {
-
-                 alert(error.message);
-             });
-     });
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                 // Registration successful
+                const user = userCredential.user;
+                console.log('User registered:', user.uid); // Debug: Log user ID
+            
+                // User information to be stored in Realtime Database
+                const userInfo = {
+                    name: "",
+                    email: user.email,
+                    bio: "",
+                    profilePictureUrl: ""
+                };
+            
+                // Reference to the location where user information will be stored
+                const userRef = ref(database, 'users/' + user.uid);
+                console.log('Database ref:', userRef.toString());
+            
+                // Set user information in the Realtime Database
+                set(userRef, userInfo)
+                    .then(() => {
+                        console.log('User information saved to Realtime Database');
+                        alert("Registration successful");
+                        window.location.href = "/Auth/Login";
+                    })
+                    .catch((error) => {
+                        console.error('Error saving user information:', error);
+                        alert('Error saving user information');
+                    });
+            
+            })
+            .catch((error) => {
+                console.error('Error registering user:', error);
+                alert('Error registering user');
+            });
+    });
 </script>
-<div class="text-center">
-    <h2>SignUp  : </h2>
-    <form id="signupForm">
-        <label>Email :</label>
-        <input type="email" id="signupEmail" required />
-        <br />
-        <label>Password :</label>
-        <input type="password" id="signupPassword" required />
-        <br />
-        <button type="submit">Signup</button>
-    </form>
 
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card mt-5">
+                <div class="card-body">
+                    <h2 class="card-title text-center">Sign Up</h2>
+                    <form id="signupForm">
+                        <div class="form-group">
+                            <label for="signupEmail">Email:</label>
+                            <input type="email" id="signupEmail" class="form-control" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="signupPassword">Password:</label>
+                            <input type="password" id="signupPassword" class="form-control" minlength="6" required />
+                        </div>
+                        <br />
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Sign Up</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

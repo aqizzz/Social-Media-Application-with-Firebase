@@ -1,0 +1,131 @@
+﻿@inject string FirebaseConfig
+@{
+    ViewData["Title"] = "Edit Profile";
+}
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
+    import { getAuth, updateEmail, updateProfile } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-auth.js";
+    import { getDatabase, ref, update, get } from 'https://www.gstatic.com/firebasejs/9.1.3/firebase-database.js';
+    import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-storage.js";
+
+    const firebaseConfig = @Html.Raw(FirebaseConfig);
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const database = getDatabase(app);
+    const storage = getStorage(app);
+
+    window.addEventListener('load', function() {
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                const userId = user.uid;
+                const userRef = ref(database, 'users/' + userId);
+
+                get(userRef).then(snapshot => {
+                    if (snapshot.exists()) {
+                        const userData = snapshot.val();
+                        document.getElementById('name').value = userData.name || '';
+                        document.getElementById('email').value = userData.email || '';
+                        document.getElementById('bio').value = userData.bio || '';
+                        if (userData.profilePictureUrl) {
+                            document.getElementById('profilePicture').src = userData.profilePictureUrl;
+                            document.getElementById('profilePicture').style.display = 'block';
+                        }
+                    } else {
+                        console.log('No user data available');
+                    }
+                }).catch(error => {
+                    console.error('Error fetching user data:', error);
+                });
+            } else {
+                window.location.href = '/Auth/Login';
+            }
+        });
+    });
+
+    document.getElementById('updateProfileButton').addEventListener('click', () => {
+        const user = auth.currentUser;
+        if (user) {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const bio = document.getElementById('bio').value;
+
+            const updates = {
+                name: name,
+                email: email,
+                bio: bio
+            };
+
+            // Update profile picture
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const fileRef = storageRef(storage, 'profile_pictures/' + user.uid + '/' + file.name);
+                uploadBytes(fileRef, file).then(() => {
+                    getDownloadURL(fileRef).then(downloadURL => {
+                        updates.profilePictureUrl = downloadURL;
+                        update(ref(database, 'users/' + user.uid), updates).then(() => {
+                            alert('Profile updated successfully');
+                        }).catch(error => {
+                            console.error('Error updating profile:', error);
+                        });
+                    });
+                }).catch(error => {
+                    console.error('Error uploading file:', error);
+                });
+            } else {
+                // No file selected, just update other fields
+                update(ref(database, 'users/' + user.uid), updates).then(() => {
+                    alert('Profile updated successfully');
+                    window.location.href = '/Auth/ViewProfile';
+                }).catch(error => {
+                    console.error('Error updating profile:', error);
+                });
+            }
+        }
+    });
+</script>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card mt-5">
+                <div class="card-body">
+                    <h2 class="card-title text-center">Edit Profile</h2>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <img id="profilePicture" src="" alt="Profile Picture" style="display:none; width:200px; height:200px;" />
+                    </div>
+                    <form id="editProfileForm">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" class="form-control" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" class="form-control" required disabled/>
+                        </div>
+                        <div class="form-group">
+                            <label for="bio">Bio:</label>
+                            <textarea id="bio" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="fileInput">Profile Picture:</label>
+                            <input type="file" id="fileInput" class="form-control" />
+                        </div>
+                        <br />
+                        <div class="text-center">
+                            <a href="/Auth/ChangePassword">Change Password</a>
+                        </div> 
+                        <br />
+                        <div class="text-center">
+                            <button class="btn btn-primary" type="button" id="updateProfileButton" class="btn btn-primary">Update Profile</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

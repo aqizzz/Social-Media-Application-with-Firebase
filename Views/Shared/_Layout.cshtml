@@ -12,16 +12,42 @@
     <script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js"></script>
 
-    <script>
+    <script  type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
-        import { getauth } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js";
 
         const firebaseConfig = @Html.Raw(FirebaseConfig);
 
         const app = initializeApp(firebaseConfig);
-        const auth = getauth(app);
+        const auth = getAuth(app);
 
-        //check if currentuserexist then I hide that 2 li
+        function updateNavBasedOnAuth(user) {
+            const loginLink = document.querySelector('#loginLink');
+            const signupLink = document.querySelector('#signupLink');
+            const logoutLink = document.querySelector('#logoutLink');
+
+            if (user) {
+                loginLink.style.display = 'none';
+                signupLink.style.display = 'none';
+                logoutLink.style.display = 'block';
+            } else {
+                loginLink.style.display = 'block';
+                signupLink.style.display = 'block';
+                logoutLink.style.display = 'none';
+            }
+        }
+
+        onAuthStateChanged(auth, (user) => {
+            updateNavBasedOnAuth(user);
+        });
+
+        window.logout = function () {
+            signOut(auth).then(() => {
+                window.location.href = '/Auth/Login';
+            }).catch((error) => {
+                console.error('Error signing out:', error);
+            });
+        }
     </script>
 
     <script>
@@ -38,13 +64,24 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between"  id="navbarNav">
+                    <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="ViewProfile">Profile</a>
+                        </li>
+                    </ul>
+                     <ul class="navbar-nav">
+                        <li class="nav-item" id="loginLink">
+                            <a class="nav-link" asp-area="" asp-controller="Auth" asp-action="Login">Login</a>
+                        </li>
+                        <li class="nav-item" id="signupLink">
+                            <a class="nav-link" asp-area="" asp-controller="Auth" asp-action="Signup">Signup</a>
+                        </li>
+                        <li class="nav-item" id="logoutLink" style="display: none;">
+                            <a class="nav-link" asp-area="" onclick="logout()">Logout</a>
                         </li>
                     </ul>
                 </div>

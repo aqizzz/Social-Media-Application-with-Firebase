@@ -1,0 +1,80 @@
+﻿@inject string FirebaseConfig
+@{
+    ViewData["Title"] = "View Profile";
+}
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
+    import { getAuth } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-auth.js";
+    import { getDatabase, ref, get } from 'https://www.gstatic.com/firebasejs/9.1.3/firebase-database.js';
+
+    const firebaseConfig = @Html.Raw(FirebaseConfig);
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const database = getDatabase(app);
+
+    window.addEventListener('load', function() {
+        // Check if user is authenticated
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                // User is signed in
+                const userId = user.uid;
+
+                // Reference to the user's profile in Realtime Database
+                const userRef = ref(database, 'users/' + userId);
+
+                // Get user data
+                get(userRef).then(snapshot => {
+                    if (snapshot.exists()) {
+                        const userData = snapshot.val();
+                        console.log(userData);
+                        document.getElementById('profileName').innerText = userData.name || 'N/A';
+                        document.getElementById('profileEmail').innerText = userData.email || 'N/A';
+                        document.getElementById('profileBio').innerText = userData.bio || 'N/A';
+                        if (userData.profilePictureUrl) {
+                            document.getElementById('profilePicture').src = userData.profilePictureUrl;
+                            document.getElementById('profilePicture').style.display = 'block';
+                        }
+                    } else {
+                        console.log('No user data available');
+                    }
+                }).catch(error => {
+                    console.error('Error fetching user data:', error);
+                });
+            } else {
+                // No user is signed in
+                window.location.href = '/Auth/Login';
+            }
+        });
+    });
+</script>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card mt-5">
+                <div class="card-body">
+                    <h2 class="card-title text-center">View Profile</h2>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <img id="profilePicture" src="" alt="Profile Picture" style="display:none; width:200px; height:200px;" />
+                    </div>
+                    <div class="form-group">
+                        <label for="profileName">Name:</label>
+                        <p id="profileName">Loading...</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="profileEmail">Email:</label>
+                        <p id="profileEmail">Loading...</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="profileBio">Bio:</label>
+                        <p id="profileBio">Loading...</p>
+                    </div>
+                    <a type="button" class="btn btn-primary" href="/Auth/EditProfile">Edit Profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

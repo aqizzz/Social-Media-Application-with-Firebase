@@ -1,44 +1,37 @@
-﻿@inject string FirebaseConfig
-@{
-    ViewData["Title"] = "Signup";
+﻿@{
+    ViewData["Title"] = "Sign Up";
 }
-<script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js';
-     import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.1.3/firebase-auth.js';
 
-    const firebaseConfig = @Html.Raw(FirebaseConfig);
-         const app = initializeApp(firebaseConfig);
-         const auth = getAuth(app);
+<script src="~/js/auth/signup.js" type="module" defer></script>
 
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center mb-4">Sign Up</h2>
 
-     document.getElementById("signupForm").addEventListener("submit", function (event) {
-         event.preventDefault();
+            <div id="serverErrMsg" class="alert alert-danger d-flex align-items-center justify-content-center visually-hidden" role="alert"></div>
 
-         const email = document.getElementById("signupEmail").value;
-         const password = document.getElementById("signupPassword").value;
+            <form id="signupForm" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="signupEmail" class="form-label">Email:</label>
+                    <input type="email" class="form-control" id="signupEmail" required>
+                    <div class="invalid-feedback">
+                        Please enter a valid email address.
+                    </div>
+                </div>
 
-         createUserWithEmailAndPassword(auth, email, password)
-             .then((userCredential) => {
+                <div class="mb-3">
+                    <label for="signupPassword" class="form-label">Password:</label>
+                    <input type="password" class="form-control" id="signupPassword" required minlength="8">
+                    <div class="invalid-feedback">
+                        Password must be at least 8 characters long.
+                    </div>
+                </div>
 
-                 alert("Sign up successful");
-                 window.location.href = "/Home";
-             })
-             .catch((error) => {
-
-                 alert(error.message);
-             });
-     });
-</script>
-<div class="text-center">
-    <h2>SignUp  : </h2>
-    <form id="signupForm">
-        <label>Email :</label>
-        <input type="email" id="signupEmail" required />
-        <br />
-        <label>Password :</label>
-        <input type="password" id="signupPassword" required />
-        <br />
-        <button type="submit">Signup</button>
-    </form>
-
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary mt-3">Sign Up</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

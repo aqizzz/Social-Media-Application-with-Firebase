@@ -1,3 +1,50 @@
 # local env files
 .env*.local
 .env
+
+# Build Folders
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+
+# Visual Studio
+.vs/
+
+# Packages and Dependencies
+packages/
+node_modules/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*.cache
+*.pdb
+
+# Cache
+[Tt]humbs.db
+
+# Secrets
+appsettings.json
+appsettings.Development.json
+
+# Generated Files
+*.dll
+*.exe
+*.iobj
+*.ipdb
+*.manifest
+*.tlog
+*.rsuser
+*.DotSettings
+*.dbmdl

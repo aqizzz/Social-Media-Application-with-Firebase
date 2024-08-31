@@ -9,24 +9,6 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Social-Media-Application-with-Firebase.styles.css" asp-append-version="true" />
 
-    <script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js"></script>
-
-    <script>
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
-        import { getauth } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js";
-
-        const firebaseConfig = @Html.Raw(FirebaseConfig);
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getauth(app);
-
-        //check if currentuserexist then I hide that 2 li
-    </script>
-
-    <script>
-        console.log("Firebase API Key: @Environment.GetEnvironmentVariable("FIREBASE_API_KEY")");
-    </script>
 
 </head>
 <body>
@@ -47,6 +29,27 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
+
+                    <ul class="navbar-nav auth" id="authNav">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Signup">Sign Up</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Login">Login</a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav" id="logoutNav" style="display: none;">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="userDropdown">
+                                
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-controller="Home" asp-action="Profile">Profile</a></li>
+                                <li><a class="dropdown-item" id="logoutBtn" asp-controller="Home" asp-action="Index">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -64,7 +67,7 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" type="module" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

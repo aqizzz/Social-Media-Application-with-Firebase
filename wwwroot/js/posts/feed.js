@@ -1,4 +1,5 @@
 ﻿import { auth, database, ref, onValue, query, orderByChild } from '../db.js';
+import { initializeLikeButton } from './like.js';
 
 window.addEventListener('authStateChecked', () => {
     const postsFeed = document.getElementById('postsFeed');
@@ -12,7 +13,7 @@ window.addEventListener('authStateChecked', () => {
             <p class="card-text" style="cursor: pointer;" onClick="window.location.href='/posts/post?id=${postId}'">${post.content}</p>
             ${post.imageUrl ? `<img src="${post.imageUrl}" class="img-fluid mb-2" alt="Post image">` : ''}
             <p class="card-text"><small class="text-muted">Posted on ${new Date(post.createdAt).toLocaleString()}</small></p>
-            <button class="btn btn-primary btn-sm me-2">Like (${post.likes})</button>
+            <button id="likeButton-${postId}" class="btn btn-primary btn-sm me-2">Like (${post.likes})</button>
             <a class="btn btn-secondary btn-sm" href="/posts/post?id=${postId}">Comments (${post.comments})</a>
         </div>
     `;
@@ -39,6 +40,10 @@ window.addEventListener('authStateChecked', () => {
             posts.reverse().forEach((post) => {
                 const postElement = createPostElement(post, post.id);
                 postsFeed.appendChild(postElement);
+
+                // like
+                const likeButton = document.getElementById(`likeButton-${post.id}`);
+                initializeLikeButton(post.id, likeButton);
             });
 
             if (posts.length === 0) {

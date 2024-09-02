@@ -1,4 +1,5 @@
 ﻿import { auth, database, ref, onValue, push, serverTimestamp, get, update } from '../db.js';
+import { initializeLikeButton } from './like.js'; 
 
 const postDetails = document.getElementById('postDetails');
 const commentForm = document.getElementById('commentForm');
@@ -28,10 +29,12 @@ function loadPostDetails() {
                     </div>
                 `;
 
-            // Add like functionality
+            /*// Add like functionality
             document.getElementById('likeButton').addEventListener('click', () => {
                 // Implement like functionality here
-            });
+            });*/
+            const likeButton = document.getElementById('likeButton');
+            initializeLikeButton(postId, likeButton);
         } else {
             postDetails.innerHTML = '<p class="text-center">Post not found.</p>';
         }

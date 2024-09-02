@@ -1,0 +1,118 @@
+﻿@{
+    ViewData["Title"] = "User Profile";
+    string userId = ViewBag.UserId as string ?? string.Empty;
+}
+
+<script src="~/js/profile/profilePage.js" type="module" defer></script>
+
+<div class="container">
+    <div class="row">
+        <!-- Profile Info -->
+        <div class="col-md-3">
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-3">
+                    
+
+                    <div class="d-flex justify-content-center align-items-center mb-3">
+                        <img id="profilePicture" src="" alt="Profile Picture" class="rounded-circle border" style="display:none; width:100px; height:100px;" />
+                    </div>
+
+                    <!-- Follow Button -->
+                    <div class="d-flex justify-content-center align-items-center mb-3">
+                        <button id="followButton" class="btn btn-success btn-sm" style="width: 100px;">Follow</button>
+                    </div>
+
+                    <div class="p-2">
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="profileName" class="fw-bold">Name:</label>
+                            </div>
+                            <div class="col-8">
+                                <p id="profileName" class="text-secondary mb-1">Loading...</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="profileEmail" class="fw-bold">Email:</label>
+                            </div>
+                            <div class="col-8">
+                                <p id="profileEmail" class="text-secondary mb-1">Loading...</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="profileBio" class="fw-bold">Bio:</label>
+                            </div>
+                            <div class="col-8">
+                                <p id="profileBio" class="text-secondary mb-1">Loading...</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="profileFollowers" class="fw-bold">Followers:</label>
+                            </div>
+                            <div class="col-8">
+                                <p id="profileFollowers" class="text-secondary mb-1">Loading...</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="profileFollowing" class="fw-bold">Following:</label>
+                            </div>
+                            <div class="col-8">
+                                <p id="profileFollowing" class="text-secondary mb-1">Loading...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center mt-2">
+                        <div class="col-12">
+                            <a type="button" class="btn btn-primary btn-sm w-100" href="/Auth/EditProfile">Edit Profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Posts -->
+        <div class="col-md-6">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="text-primary">Your Feed</h2>
+            </div>
+
+            <div id="postsFeed" class="posts-container">
+                <!-- Feed posts will be dynamically loaded here -->
+            </div>
+        </div>
+
+        <!-- Followers & Following -->
+        <div class="col-md-3">
+            <!-- Followers List -->
+            <div class="mb-4">
+                <h5>Followers</h5>
+                <div id="followersList" class="list-group">
+                    <!-- Followers will be dynamically loaded here -->
+                </div>
+                
+            </div>
+
+            <!-- Following List -->
+            <div>
+                <h5>Following</h5>
+                <div id="followingList" class="list-group">
+                    <!-- Following will be dynamically loaded here -->
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    const userId = '@userId';
+    // The userId variable is now available in your JavaScript code
+</script>

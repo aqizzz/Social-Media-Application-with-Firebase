@@ -30,6 +30,19 @@
                         </li>
                     </ul>
 
+                    
+                        
+                    <!-- Search Box -->
+                    <form class="d-flex me-3 authenticatedEl" asp-controller="Search" asp-action="Index" method="get">
+                        <input class="form-control me-2" type="search" name="query" placeholder="Search users..." aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+
+                    
+
+
+
+
                     <ul class="navbar-nav guestEl d-none">
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Auth" asp-action="Signup">Sign Up</a>

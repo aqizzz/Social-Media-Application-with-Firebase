@@ -41,7 +41,7 @@ window.addEventListener('authStateChecked', () => {
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             
-                            <p class="mb-1 text-muted"><a href="/profile/${userId}">${userData.email}</a></p>
+                            <p class="mb-1 text-muted"><a href="/MyProfile/${userId}">${userData.email}</a></p>
                         </div>
                         <button class="btn btn-primary btn-sm follow-btn" data-user-id="${userId}">Follow</button>
                     </div>

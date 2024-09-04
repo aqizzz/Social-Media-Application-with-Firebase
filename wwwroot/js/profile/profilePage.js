@@ -2,23 +2,29 @@
 import { initializeLikeButton } from '../posts/like.js';
 
 window.addEventListener('authStateChecked', () => {
-    const pathSegments = window.location.pathname.split('/');
-    const userIdFromPath = pathSegments[pathSegments.length - 1];
-    console.log('Path Segments:', pathSegments);
-    console.log('Extracted userIdFromPath:', userIdFromPath);
-
+    
     const user = auth.currentUser;
-
-    let userId;
-
-    if (userIdFromPath && userIdFromPath !== 'Index') {
-        userId = userIdFromPath;
-    } else if (userIdFromPath === 'Index' && user) {
-        userId = user.uid;
-    } else {
+    if (!user) {
         window.location.href = '/Auth/Login';
         return;
     }
+    const pathSegments = window.location.pathname.split('/');
+    const userIdFromPath = pathSegments[pathSegments.length - 1];
+    let userId;
+
+    const profileLink = document.getElementById('profileLink');
+    profileLink.href = "/MyProfile";
+
+
+    if (userIdFromPath === "MyProfile" || userIdFromPath === "Index") {
+        userId = user.uid;
+    } else {
+        userId = userIdFromPath;
+
+        
+    }
+
+ 
 
     // Load profile, posts, followers, and following lists
     loadUserProfile(userId);
@@ -32,6 +38,8 @@ window.addEventListener('authStateChecked', () => {
     } else {
         document.getElementById('followButton').style.display = 'none';
     }
+
+
 });
 
 function loadUserProfile(userId) {
@@ -43,7 +51,7 @@ function loadUserProfile(userId) {
             console.log(userData);
 
             document.getElementById('profileName').innerText = userData.name || 'N/A';
-            document.getElementById('profileEmail').innerHTML = `<a href="/profile?userId=${userId}">${userData.email || 'N/A'}</a>`;
+            document.getElementById('profileEmail').innerHTML = `<a href="/MyProfile?userId=${userId}">${userData.email || 'N/A'}</a>`;
             document.getElementById('profileBio').innerText = userData.bio || 'N/A';
 
             const profilePictureUrl = userData.profilePictureUrl || '/images/default-profile.png'; // Default profile picture

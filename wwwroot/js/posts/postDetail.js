@@ -16,12 +16,27 @@ if (!postId) {
 
 function loadPostDetails() {
     const postRef = ref(database, `posts/${postId}`);
-    onValue(postRef, (snapshot) => {
+    onValue(postRef, async (snapshot) => {
         const post = snapshot.val();
+        const userRef = ref(database, `users/${post.authorId}`);
+        const userSnapshot = await get(userRef);
+        const userData = userSnapshot.val();
+
+        const userName = userData.name || userData.email || 'Unknown';
+        const profilePictureUrl = userData.profilePictureUrl || '/images/default-profile.png'; // Default profile picture
+
         if (post) {
             postDetails.innerHTML = `
                     <div class="card-body">
-                        <h3 class="card-title">${post.authorName}</h3>
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <a href="/profile/${post.authorId}">
+                                <img src="${profilePictureUrl}" class="rounded-circle" style="width:45px;height:45px;" />
+                            </a>
+                            <a href="/profile/${post.authorId}">
+                                <h6 class="text-start" style="margin-right: 15px;">${userName}</h6>
+                            </a>
+                        </div>
+
                         <p class="card-text">${post.content}</p>
                         ${post.imageUrl ? `<img src="${post.imageUrl}" class="img-fluid mb-2" alt="Post image">` : ''}
                         <p class="card-text"><small class="text-muted">Posted on ${new Date(post.createdAt).toLocaleString()}</small></p>
@@ -29,10 +44,6 @@ function loadPostDetails() {
                     </div>
                 `;
 
-            /*// Add like functionality
-            document.getElementById('likeButton').addEventListener('click', () => {
-                // Implement like functionality here
-            });*/
             const likeButton = document.getElementById('likeButton');
             initializeLikeButton(postId, likeButton);
         } else {
@@ -52,7 +63,7 @@ function loadComments() {
             commentElement.innerHTML = `
                     <div class="card-body">
                         <p class="card-text">${comment.content}</p>
-                        <p class="card-text"><small class="text-muted">By ${comment.authorName} on ${new Date(comment.createdAt).toLocaleString()}</small></p>
+                        <p class="card-text"><small class="text-muted">By <a href="/profile/${comment.authorId}">${comment.authorName}</a> on ${new Date(comment.createdAt).toLocaleString()}</small></p>
                     </div>
                 `;
             commentsList.appendChild(commentElement);

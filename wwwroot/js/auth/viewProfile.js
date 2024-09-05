@@ -32,6 +32,6 @@ window.addEventListener('authStateChecked', () => {
         });
     } else {
         // No user is signed in
-        window.location.href = '/Auth/Login';
+        window.location.href = '/login';
     }
 });

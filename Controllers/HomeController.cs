@@ -18,17 +18,7 @@ namespace Social_Media_Application_with_Firebase.Controllers
             return View();
         }
 
-        public IActionResult CreatePost()
-        {
-            return View();
-        }
-
         public IActionResult PostDetail()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
         {
             return View();
         }

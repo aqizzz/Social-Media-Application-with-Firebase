@@ -3,27 +3,47 @@
 }
 
 <div class="text-center container my-5 guestEl d-none">
-    <h1 class="display-4 mb-5 fw-bold">Welcome</h1>
+    <h1 class="display-4 mb-3 fw-bold">Welcome</h1>
+    <p class="mb-5">Share posts and engage with the world.</p>
 
     <div class="row col-12 col-md-6 mx-auto">
         <div class="col-12 col-sm-6 mb-3 mb-sm-0">
-            <a class="btn btn-outline-primary btn-lg w-100" type="button" asp-route="login">Login</a>
+            <a class="btn btn-outline-primary btn-lg w-100" type="button" href="/login">Login</a>
         </div>
 
         <div class="col-12 col-sm-6">
-            <a class="btn btn-primary btn-lg w-100" type="button" asp-route="signup">Sign Up</a>
+            <a class="btn btn-primary btn-lg w-100" type="button" href="signup">Sign Up</a>
         </div>
     </div>
 </div>
 
+<script src="~/js/posts/createPost.js" type="module" defer></script>
 <script src="~/js/posts/feed.js" type="module" defer></script>
 
-<div class="container my-5 authenticatedEl d-none">
+<div class="container my-4 authenticatedEl d-none">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="text-primary">Your Feed</h2>
-                <a class="btn btn-outline-primary" type="button" asp-route="createPost">Create a Post</a>
+            <!-- Create Post Form -->
+            <div class="card shadow-lg border-0 mb-4">
+                <div class="card-body">
+                    <form id="createPostForm">
+                        <div class="mb-3">
+                            <textarea id="postContent" class="form-control" rows="4" required placeholder="Write something..."></textarea>
+                        </div>
+
+                        <div class="d-flex justify-content-end align-items-center gap-3">
+                            <!-- Hidden file input -->
+                            <input type="file" id="postImage" class="d-none" accept="image/*">
+
+                            <span id="selectedFileName" class="text-muted ms-2"></span>
+
+                            <!-- Button to trigger file input -->
+                            <button type="button" class="btn btn-secondary" id="uploadImageButton"><i class="fa-regular fa-image"></i></button>
+
+                            <button id="createPostBtn" type="submit" class="btn btn-primary" disabled>Post</button>
+                        </div>
+                    </form>
+                </div>
             </div>
 
             <div id="postsFeed" class="posts-container">

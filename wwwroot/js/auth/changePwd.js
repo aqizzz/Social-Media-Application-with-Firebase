@@ -5,7 +5,7 @@ window.addEventListener('authStateChecked', () => {
 
     if (!user) {
         // No user is signed in
-        window.location.href = '/Auth/Login';
+        window.location.href = '/login';
     }
 });
 
@@ -39,7 +39,7 @@ form.addEventListener('submit', function (event) {
                 updatePassword(user, newPassword.value)
                     .then(() => {
                         alert('Password updated successfully');
-                        window.location.href = '/Auth/EditProfile';
+                        window.location.href = '/profile/edit';
                     })
                     .catch((error) => {
                         console.error('Error updating password:', error);

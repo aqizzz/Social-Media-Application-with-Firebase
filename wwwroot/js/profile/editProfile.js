@@ -26,7 +26,7 @@ window.addEventListener('authStateChecked', function () {
                 console.error('Error fetching user data:', error);
             });
         } else {
-            window.location.href = '/Auth/Login';
+            window.location.href = '/login';
         }
 });
 
@@ -59,7 +59,7 @@ document.getElementById('updateProfileButton').addEventListener('click', async (
             // Update other fields
             await update(ref(database, 'users/' + user.uid), updates);
             alert('Profile updated successfully');
-            window.location.href = '/Auth/ViewProfile';
+            window.location.href = '/profile';
         } catch (error) {
             console.error('Error updating profile:', error);
         }

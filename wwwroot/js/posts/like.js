@@ -1,5 +1,16 @@
 ﻿import { auth, database, ref, get, update, remove, set } from '../db.js';
 
+export function updatePostLikes(postId, likes) {
+    const likeButton = document.getElementById(`likeButton-${postId}`);
+    if (likeButton) {
+        const likeCount = likeButton.querySelector('span') || document.createElement('span');
+        likeCount.textContent = likes;
+        if (!likeButton.contains(likeCount)) {
+            likeButton.appendChild(likeCount);
+        }
+    }
+}
+
 export function initializeLikeButton(postId, likeButton) {
     if (!likeButton) return;
 

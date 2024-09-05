@@ -1,6 +1,5 @@
 ﻿import { auth, database, ref, onValue, get, query, orderByChild, onChildChanged, set, remove } from '../db.js';
-import { initializeLikeButton } from '../posts/like.js';
-import { updatePostLikes } from '../posts/feed.js';
+import { initializeLikeButton, updatePostLikes } from '../posts/like.js';
 
 window.addEventListener('authStateChecked', () => {
     const pathSegments = window.location.pathname.split('/');

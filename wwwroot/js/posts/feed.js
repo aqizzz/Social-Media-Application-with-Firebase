@@ -1,5 +1,5 @@
 ﻿import { auth, database, ref, get, onValue, query, orderByChild, onChildChanged } from '../db.js';
-import { initializeLikeButton } from './like.js';
+import { initializeLikeButton, updatePostLikes } from './like.js';
 
 async function createPostElement(post, postId) {
     const userRef = ref(database, `users/${post.authorId}`);
@@ -30,17 +30,6 @@ async function createPostElement(post, postId) {
         </div>
     `;
     return postElement;
-}
-
-export function updatePostLikes(postId, likes) {
-    const likeButton = document.getElementById(`likeButton-${postId}`);
-    if (likeButton) {
-        const likeCount = likeButton.querySelector('span') || document.createElement('span');
-        likeCount.textContent = likes;
-        if (!likeButton.contains(likeCount)) {
-            likeButton.appendChild(likeCount);
-        }
-    }
 }
 
 function loadPosts() {

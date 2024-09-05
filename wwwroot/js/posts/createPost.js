@@ -50,7 +50,7 @@ form.addEventListener('submit', async function (event) {
 
         alert('Post created successfully!');
         form.reset();
-        submitBtn.disabled = true;
+        window.location.href = '/';
     } catch (error) {
         console.dir('Error creating post:', error);
         alert('An error occurred while creating the post. Please try again.');

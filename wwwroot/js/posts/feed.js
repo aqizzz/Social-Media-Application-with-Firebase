@@ -41,6 +41,14 @@ function loadPosts() {
         return;
     }
 
+    const following = [];
+    const followingRef = ref(database, `follows/${user.uid}/following`);
+    onValue(followingRef, (snapshot) => {
+        snapshot.forEach((childSnapshot) => {
+            following.push(childSnapshot.key);
+        });
+    })
+
     const postsRef = ref(database, 'posts');
     const postsQuery = query(postsRef, orderByChild('createdAt'));
 
@@ -51,7 +59,14 @@ function loadPosts() {
             posts.push({ id: childSnapshot.key, ...childSnapshot.val() });
         });
 
+        if (posts.length === 0) {
+            postsFeed.innerHTML = '<p class="text-center">No posts to display.</p>';
+            return;
+        }
+
         posts.reverse().forEach(async (post) => {
+            if (!following.includes(post.authorId) && post.authorId !== user.uid) return;
+
             const postElement = await createPostElement(post, post.id);
             postsFeed.appendChild(postElement);
 
@@ -59,10 +74,6 @@ function loadPosts() {
             const likeButton = document.getElementById(`likeButton-${post.id}`);
             initializeLikeButton(post.id, likeButton);
         });
-
-        if (posts.length === 0) {
-            postsFeed.innerHTML = '<p class="text-center">No posts to display.</p>';
-        }
     });
 }
 

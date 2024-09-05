@@ -168,7 +168,7 @@ function loadFollowers(userId) {
             const profilePictureUrl = userData.profilePictureUrl || '/images/default-profile.png'; // Default profile picture
 
             const followerItem = document.createElement('div');
-            followerItem.className = 'list-group-item list-group-item-action';
+            followerItem.className = 'list-group-item list-group-item-action border-0';
 
             followerItem.innerHTML = `
                 <div class="d-flex align-items-center">

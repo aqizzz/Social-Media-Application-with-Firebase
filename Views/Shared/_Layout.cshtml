@@ -24,8 +24,8 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li class="nav-item authenticatedEl d-none">
+                            <a class="nav-link text-dark" href="/profile">Profile</a>
                         </li>
                     </ul>
 
@@ -51,7 +51,6 @@
                                 &nbsp;
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/profile">Profile</a></li>
                                 <li><a class="dropdown-item" id="logoutBtn" asp-controller="Home" asp-action="Index">Logout</a></li>
                             </ul>
                         </li>
@@ -68,12 +67,13 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - PostSphere - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - PostSphere
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" type="module" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js" integrity="sha512-6sSYJqDreZRZGkJ3b+YfdhB3MzmuP9R7X1QZ6g5aIXhRvR1Y/N/P47jmnkENm7YL3oqsmI6AK+V6AD99uWDnIw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

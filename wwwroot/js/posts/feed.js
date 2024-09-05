@@ -1,7 +1,7 @@
 ﻿import { auth, database, ref, get, onValue, query, orderByChild } from '../db.js';
 import { initializeLikeButton } from './like.js';
 
-export async function createPostElement(post, postId) {
+async function createPostElement(post, postId) {
     const userRef = ref(database, `users/${post.authorId}`);
     const snapshot = await get(userRef);
     const userData = snapshot.val();

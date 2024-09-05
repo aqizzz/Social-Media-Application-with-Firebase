@@ -1,17 +1,24 @@
 ﻿import { auth, database, ref, storageRef, push, serverTimestamp, storage, uploadBytes, getDownloadURL } from '../db.js';
 
+document.getElementById('uploadImageButton').addEventListener('click', () => {
+    document.getElementById('postImage').click();
+});
+
+document.getElementById('postImage').addEventListener('change', (event) => {
+    const fileName = event.target.files[0] ? event.target.files[0].name : '';
+    document.getElementById('selectedFileName').textContent = fileName;
+});
+
 const form = document.getElementById('createPostForm');
 const contentInput = document.getElementById('postContent');
 const imageInput = document.getElementById('postImage');
+const submitBtn = document.getElementById('createPostBtn');
+
+contentInput.addEventListener('input', (event) => submitBtn.disabled = !event.target.value.length);
 
 form.addEventListener('submit', async function (event) {
     event.preventDefault();
     event.stopPropagation();
-
-    if (form.checkValidity() === false) {
-        form.classList.add('was-validated');
-        return;
-    }
 
     const user = auth.currentUser;
     if (!user) {
@@ -43,8 +50,7 @@ form.addEventListener('submit', async function (event) {
 
         alert('Post created successfully!');
         form.reset();
-        form.classList.remove('was-validated');
-        window.location.href = ('/');
+        submitBtn.disabled = true;
     } catch (error) {
         console.dir('Error creating post:', error);
         alert('An error occurred while creating the post. Please try again.');

@@ -14,19 +14,22 @@
                 </ol>
             </nav>
 
-            <div id="postDetails" class="card">
+            <div id="postDetails" class="card shadow-lg border-0 mb-3">
                 <!-- Post details -->
             </div>
-            <div class="mt-4">
-                <h4>Comments</h4>
-                <form id="commentForm" class="mb-3">
-                    <div class="mb-3">
-                        <textarea id="commentContent" class="form-control" rows="2" required></textarea>
+
+            <div class="card shadow-lg border-0 mt-4">
+                <div class="card-body">
+                    <h4 class="mb-3">Comments</h4>
+                    <form id="commentForm" class="mb-3">
+                        <div class="mb-3">
+                            <textarea id="commentContent" class="form-control" rows="2" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Comment</button>
+                    </form>
+                    <div id="commentsList">
+                        <!-- Comments -->
                     </div>
-                    <button type="submit" class="btn btn-primary">Add Comment</button>
-                </form>
-                <div id="commentsList">
-                    <!-- Comments -->
                 </div>
             </div>
         </div>

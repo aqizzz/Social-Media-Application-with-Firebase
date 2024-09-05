@@ -1,5 +1,6 @@
-﻿import { auth, database, ref, onValue, get, query, orderByChild, set, remove } from '../db.js';
+﻿import { auth, database, ref, onValue, get, query, orderByChild, onChildChanged, set, remove } from '../db.js';
 import { initializeLikeButton } from '../posts/like.js';
+import { updatePostLikes } from '../posts/feed.js';
 
 window.addEventListener('authStateChecked', () => {
     const pathSegments = window.location.pathname.split('/');
@@ -115,6 +116,11 @@ function loadUserPosts(userId) {
         if (posts.length === 0) {
             postsFeed.innerHTML = '<p class="text-center">No posts to display.</p>';
         }
+    }, { onlyOnce: true });
+
+    onChildChanged(postsRef, (snapshot) => {
+        const updatedPost = snapshot.val();
+        updatePostLikes(snapshot.key, updatedPost.likes);
     });
 }
 
@@ -138,7 +144,7 @@ function createPostElement(post, postId, userData) {
             <p class="card-text" style="cursor: pointer;" onClick="window.location.href='/posts/post?id=${postId}'">${post.content}</p>
             ${post.imageUrl ? `<a href="/posts/post?id=${postId}"><img src="${post.imageUrl}" class="mb-2" alt="Post image" style="height:200px;" /></a>` : ''}
             <p class="card-text"><small class="text-muted">Posted on ${new Date(post.createdAt).toLocaleString()}</small></p>
-            <button id="likeButton-${postId}" class="btn btn-primary btn-sm me-2">Like (${post.likes})</button>
+            <button id="likeButton-${postId}" class="btn btn-outline-primary btn-sm me-2"><i class="fa-regular fa-thumbs-up"></i> (<span>${post.likes}</span>)</button>
             <a class="btn btn-secondary btn-sm" href="/posts/post?id=${postId}">Comments (${post.comments})</a>
         </div>
     `;

@@ -8,11 +8,13 @@ export function initializeLikeButton(postId, likeButton) {
         const userLikesRef = ref(database, `likes/${postId}/${user.uid}`);
         get(userLikesRef).then((likeSnapshot) => {
             const userLiked = likeSnapshot.exists();
-            const likeButtonClass = userLiked ? 'btn-secondary' : 'btn-primary';
+            const likeButtonClass = userLiked ? 'btn-primary' : 'btn-outline-primary';
 
             likeButton.className = `btn ${likeButtonClass} btn-sm me-2`;
             likeButton.addEventListener('click', () => {
+                likeButton.disabled = true;
                 toggleLike(postId, likeButton, userLiked);
+                likeButton.disabled = false;
             });
         });
     }
@@ -37,8 +39,6 @@ function toggleLike(postId, likeButton, userLiked) {
             remove(userLikesRef).then(async () => {
                 const newLikesCount = (post.likes || 0) - 1;
                 await update(postRef, { likes: newLikesCount });
-                likeButton.textContent = `Like (${newLikesCount})`;
-                likeButton.className = `btn btn-primary btn-sm me-2`;  
                 initializeLikeButton(postId, likeButton);
             });
         } else {
@@ -46,8 +46,6 @@ function toggleLike(postId, likeButton, userLiked) {
             set(userLikesRef, true).then(async () => {
                 const newLikesCount = (post.likes || 0) + 1;
                 await update(postRef, { likes: newLikesCount });
-                likeButton.textContent = `Like (${newLikesCount})`;
-                likeButton.className = `btn btn-secondary btn-sm me-2`;  
                 initializeLikeButton(postId, likeButton);
             });
         }

@@ -1,4 +1,4 @@
-﻿import { auth, database, ref, get, onValue, query, orderByChild } from '../db.js';
+﻿import { auth, database, ref, get, onValue, query, orderByChild, onChildChanged } from '../db.js';
 import { initializeLikeButton } from './like.js';
 
 async function createPostElement(post, postId) {
@@ -25,11 +25,22 @@ async function createPostElement(post, postId) {
             <p class="card-text" style="cursor: pointer;" onClick="window.location.href='/posts/post?id=${postId}'">${post.content}</p>
             ${post.imageUrl ? `<a href="/posts/post?id=${postId}"><img src="${post.imageUrl}" class="mb-2" alt="Post image" style="height:200px;" /></a>` : ''}
             <p class="card-text"><small class="text-muted">Posted on ${new Date(post.createdAt).toLocaleString()}</small></p>
-            <button id="likeButton-${postId}" class="btn btn-primary btn-sm me-2">Like (${post.likes})</button>
+            <button id="likeButton-${postId}" class="btn btn-outline-primary btn-sm me-2"><i class="fa-regular fa-thumbs-up"></i> (<span>${post.likes}</span>)</button>
             <a class="btn btn-secondary btn-sm" href="/posts/post?id=${postId}">Comments (${post.comments})</a>
         </div>
     `;
     return postElement;
+}
+
+export function updatePostLikes(postId, likes) {
+    const likeButton = document.getElementById(`likeButton-${postId}`);
+    if (likeButton) {
+        const likeCount = likeButton.querySelector('span') || document.createElement('span');
+        likeCount.textContent = likes;
+        if (!likeButton.contains(likeCount)) {
+            likeButton.appendChild(likeCount);
+        }
+    }
 }
 
 function loadPosts() {
@@ -74,6 +85,11 @@ function loadPosts() {
             const likeButton = document.getElementById(`likeButton-${post.id}`);
             initializeLikeButton(post.id, likeButton);
         });
+    }, { onlyOnce: true });
+
+    onChildChanged(postsRef, (snapshot) => {
+        const updatedPost = snapshot.val();
+        updatePostLikes(snapshot.key, updatedPost.likes);
     });
 }
 

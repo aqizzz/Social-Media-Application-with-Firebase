@@ -40,7 +40,7 @@ function loadPostDetails() {
                         <p class="card-text">${post.content}</p>
                         ${post.imageUrl ? `<img src="${post.imageUrl}" class="img-fluid mb-2" alt="Post image">` : ''}
                         <p class="card-text"><small class="text-muted">Posted on ${new Date(post.createdAt).toLocaleString()}</small></p>
-                        <button id="likeButton" class="btn btn-primary btn-sm me-2">Like (${post.likes})</button>
+                        <button id="likeButton" class="btn btn-outline-primary btn-sm me-2"><i class="fa-regular fa-thumbs-up"></i> (${post.likes})</button>
                     </div>
                 `;
 

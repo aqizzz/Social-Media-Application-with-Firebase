@@ -1,5 +1,5 @@
 ﻿import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js';
-import { getDatabase, ref, set, get, push, onValue, update, remove, query, orderByChild, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-database.js';
+import { getDatabase, ref, set, get, push, onValue, update, remove, query, orderByChild, onChildChanged, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-database.js';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updatePassword, reauthenticateWithCredential, EmailAuthProvider } from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js';
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-storage.js';
 
@@ -39,4 +39,4 @@ const database = getDatabase(app);
 const auth = getAuth(app);
 const storage = getStorage(app);
 
-export { database, ref, set, get, push, onValue, update, remove, query, orderByChild, serverTimestamp, auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updatePassword, reauthenticateWithCredential, EmailAuthProvider, storage, storageRef, uploadBytes, getDownloadURL };
+export { database, ref, set, get, push, onValue, update, remove, query, orderByChild, onChildChanged, serverTimestamp, auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updatePassword, reauthenticateWithCredential, EmailAuthProvider, storage, storageRef, uploadBytes, getDownloadURL };

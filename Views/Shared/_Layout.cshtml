@@ -1,10 +1,9 @@
-﻿@inject string FirebaseConfig
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Social-Media-Application-with-Firebase</title>
+    <title>@ViewData["Title"] - PostSphere</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Social-Media-Application-with-Firebase.styles.css" asp-append-version="true" />
@@ -15,7 +14,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Social-Media-Application-with-Firebase</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PostSphere</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -30,26 +29,19 @@
                         </li>
                     </ul>
 
-                    
-                        
                     <!-- Search Box -->
-                    <form class="d-flex me-3 authenticatedEl" asp-controller="Search" asp-action="Index" method="get">
+                    <form class="d-flex me-3 authenticatedEl d-none" asp-controller="Search" asp-action="Index" method="get">
                         <input class="form-control me-2" type="search" name="query" placeholder="Search users..." aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
 
-                    
-
-
-
-
                     <ul class="navbar-nav guestEl d-none">
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Auth" asp-action="Signup">Sign Up</a>
+                            <a class="nav-link" href="/login">Login</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Auth" asp-action="Login">Login</a>
+                            <a class="nav-link" href="signup">Sign Up</a>
                         </li>
                     </ul>
 
@@ -59,7 +51,7 @@
                                 &nbsp;
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-controller="Auth" asp-action="ViewProfile">Profile</a></li>
+                                <li><a class="dropdown-item" href="/profile">Profile</a></li>
                                 <li><a class="dropdown-item" id="logoutBtn" asp-controller="Home" asp-action="Index">Logout</a></li>
                             </ul>
                         </li>
@@ -76,7 +68,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - Social-Media-Application-with-Firebase - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - PostSphere - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

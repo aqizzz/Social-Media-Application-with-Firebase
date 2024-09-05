@@ -35,14 +35,21 @@ window.addEventListener('authStateChecked', () => {
             if (name.includes(lowercasedQuery) || email.includes(lowercasedQuery)) {
                 usersFound = true;
                 const userItem = document.createElement('div');
-                userItem.className = 'list-group-item list-group-item-action';
+                const profilePictureUrl = userData.profilePictureUrl || '/images/default-profile.png'; // Default profile picture
+
+                userItem.className = 'list-group-item list-group-item-action py-3';
 
                 userItem.innerHTML = `
                     <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            
-                            <p class="mb-1 text-muted"><a href="/profile/${userId}">${userData.email}</a></p>
+                        <div class="d-flex align-items-center">
+                            <a href="/profile/${userId}">
+                                <img src="${profilePictureUrl}" class="rounded-circle me-3" style="width:30px;height:30px" />
+                            </a>
+                            <a href="/profile/${userId}">
+                                <span>${userData.email}</span>
+                            </a>
                         </div>
+
                         <button class="btn btn-primary btn-sm follow-btn" data-user-id="${userId}">Follow</button>
                     </div>
                 `;

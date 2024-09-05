@@ -54,19 +54,24 @@ app.MapControllerRoute(
     defaults: new { controller = "Home", action = "PostDetail" });
 
 app.MapControllerRoute(
-    name: "viewProfile",
+    name: "myProfile",
     pattern: "profile",
-    defaults: new { controller = "Auth", action = "ViewProfile" });
+    defaults: new { controller = "Profile", action = "Index" });
 
 app.MapControllerRoute(
     name: "editProfile",
     pattern: "profile/edit",
-    defaults: new { controller = "Auth", action = "EditProfile" });
+    defaults: new { controller = "Profile", action = "Edit" });
 
 app.MapControllerRoute(
     name: "changePwd",
     pattern: "profile/edit/changePassword",
     defaults: new { controller = "Auth", action = "ChangePassword" });
+
+app.MapControllerRoute(
+    name: "userProfile",
+    pattern: "profile/{userId}",
+    defaults: new { controller = "Profile", action = "Index" });
 
 app.MapControllerRoute(
     name: "login",

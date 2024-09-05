@@ -11,12 +11,12 @@ window.addEventListener('authStateChecked', () => {
 
     let userId;
 
-    if (userIdFromPath && userIdFromPath !== 'Index') {
+    if (userIdFromPath && userIdFromPath !== 'profile') {
         userId = userIdFromPath;
-    } else if (userIdFromPath === 'Index' && user) {
+    } else if (userIdFromPath === 'profile' && user) {
         userId = user.uid;
     } else {
-        window.location.href = '/Auth/Login';
+        window.location.href = '/login';
         return;
     }
 
@@ -27,10 +27,13 @@ window.addEventListener('authStateChecked', () => {
     loadFollowing(userId);
 
     // Initialize the follow button if viewing another user's profile
+    const followBtnContainer = document.getElementById('followBtnContainer')
+    const editProfileBtnContainer = document.getElementById('editProfileBtnContainer');
     if (user && user.uid !== userId) {
         initializeFollowButton(user.uid, userId);
+        followBtnContainer.classList.remove('d-none');
     } else {
-        document.getElementById('followButton').style.display = 'none';
+        editProfileBtnContainer.classList.remove('d-none');
     }
 });
 
@@ -43,7 +46,7 @@ function loadUserProfile(userId) {
             console.log(userData);
 
             document.getElementById('profileName').innerText = userData.name || 'N/A';
-            document.getElementById('profileEmail').innerHTML = `<a href="/profile?userId=${userId}">${userData.email || 'N/A'}</a>`;
+            document.getElementById('profileEmail').innerText = userData.email || 'N/A';
             document.getElementById('profileBio').innerText = userData.bio || 'N/A';
 
             const profilePictureUrl = userData.profilePictureUrl || '/images/default-profile.png'; // Default profile picture
@@ -88,7 +91,7 @@ function loadUserPosts(userId) {
     const postsRef = ref(database, 'posts');
     const userPostsQuery = query(postsRef, orderByChild('authorId'));
 
-    onValue(userPostsQuery, (snapshot) => {
+    onValue(userPostsQuery, async (snapshot) => {
         postsFeed.innerHTML = '';
         const posts = [];
         snapshot.forEach((childSnapshot) => {
@@ -98,8 +101,10 @@ function loadUserPosts(userId) {
             }
         });
 
+        const userData = await getUserData(userId);
+
         posts.reverse().forEach((post) => {
-            const postElement = createPostElement(post, post.id);
+            const postElement = createPostElement(post, post.id, userData);
             postsFeed.appendChild(postElement);
 
             // Initialize like button
@@ -113,14 +118,25 @@ function loadUserPosts(userId) {
     });
 }
 
-function createPostElement(post, postId) {
+function createPostElement(post, postId, userData) {
+    const userName = userData.name || userData.email || 'Unknown';
+    const profilePictureUrl = userData.profilePictureUrl || '/images/default-profile.png'; // Default profile picture
+
     const postElement = document.createElement('div');
-    postElement.className = 'card mb-3';
+    postElement.className = 'card shadow-lg border-0 mb-3';
     postElement.innerHTML = `
         <div class="card-body">
-            <h5 class="card-title">${post.authorName}</h5>
+            <div class="d-flex align-items-center gap-3 mb-3">
+                <a href="/profile/${post.authorId}">
+                    <img src="${profilePictureUrl}" class="rounded-circle" style="width:45px;height:45px;" />
+                </a>
+                <a href="/profile/${post.authorId}">
+                    <h6 class="text-start" style="margin-right: 15px;">${userName}</h6>
+                </a>
+            </div>
+                                    
             <p class="card-text" style="cursor: pointer;" onClick="window.location.href='/posts/post?id=${postId}'">${post.content}</p>
-            ${post.imageUrl ? `<img src="${post.imageUrl}" class="img-fluid mb-2" alt="Post image">` : ''}
+            ${post.imageUrl ? `<a href="/posts/post?id=${postId}"><img src="${post.imageUrl}" class="mb-2" alt="Post image" style="height:200px;" /></a>` : ''}
             <p class="card-text"><small class="text-muted">Posted on ${new Date(post.createdAt).toLocaleString()}</small></p>
             <button id="likeButton-${postId}" class="btn btn-primary btn-sm me-2">Like (${post.likes})</button>
             <a class="btn btn-secondary btn-sm" href="/posts/post?id=${postId}">Comments (${post.comments})</a>
@@ -142,7 +158,7 @@ function loadFollowers(userId) {
         });
 
         if (followers.length === 0) {
-            followersList.innerHTML = '<p class="text-center text-muted">No followers found.</p>';
+            followersList.innerHTML = '<p class="text-center text-muted mt-3">No followers found.</p>';
             return;
         }
 
@@ -155,11 +171,13 @@ function loadFollowers(userId) {
             followerItem.className = 'list-group-item list-group-item-action';
 
             followerItem.innerHTML = `
-                <div class="d-flex align-items-center justify-content-between">
-                    <div class="d-flex align-items-center">
-                        <img src="${profilePictureUrl}" class="rounded-circle" style="width: 25px; margin-right: 15px;" />
-                        <span class="text-start" style="margin-right: 15px;">${userName}</span>
-                    </div>
+                <div class="d-flex align-items-center">
+                    <a href="/profile/${followerId}">
+                        <img src="${profilePictureUrl}" class="rounded-circle me-3" style="width:30px;height:30px" />
+                    </a>
+                    <a href="/profile/${followerId}">
+                        <span>${userName}</span>
+                    </a>
                 </div>
             `;
 
@@ -181,7 +199,7 @@ function loadFollowing(userId) {
         });
 
         if (following.length === 0) {
-            followingList.innerHTML = '<p class="text-center text-muted">No following users found.</p>';
+            followingList.innerHTML = '<p class="text-center text-muted mt-3">No following users found.</p>';
             return;
         }
 
@@ -191,14 +209,16 @@ function loadFollowing(userId) {
             const profilePictureUrl = userData.profilePictureUrl || '/images/default-profile.png'; // Default profile picture
 
             const followedItem = document.createElement('div');
-            followedItem.className = 'list-group-item list-group-item-action';
+            followedItem.className = 'list-group-item list-group-item-action border-0';
 
             followedItem.innerHTML = `
-                <div class="d-flex align-items-center justify-content-between">
-                    <div class="d-flex align-items-center">
-                        <img src="${profilePictureUrl}" class="rounded-circle" style="width: 25px; margin-right: 15px;" />
-                        <span class="text-start" style="margin-right: 15px;">${userName}</span>
-                    </div>
+                <div class="d-flex align-items-center">
+                    <a href="/profile/${followedId}">
+                        <img src="${profilePictureUrl}" class="rounded-circle me-3" style="width:30px;height:30px" />
+                    </a>
+                    <a href="/profile/${followedId}">
+                        <span>${userName}</span>
+                    </a>
                 </div>
             `;
 

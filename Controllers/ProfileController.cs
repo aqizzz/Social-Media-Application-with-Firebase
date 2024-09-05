@@ -4,20 +4,15 @@ namespace Social_Media_Application_with_Firebase.Controllers
 {
     public class ProfileController : Controller
     {
-        [HttpGet("/profile/{userId?}")]
-        public IActionResult Index(string userId)
+        public IActionResult Index()
         {
-            if (string.IsNullOrEmpty(userId))
-            {
-                // If no userId is provided, redirect to login
-                return RedirectToAction("Login", "Auth");
-            }
-
-            ViewBag.UserId = userId;
             return View();
         }
 
 
-
+        public IActionResult Edit()
+        {
+            return View();
+        }
     }
 }

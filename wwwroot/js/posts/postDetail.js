@@ -29,10 +29,6 @@ function loadPostDetails() {
                     </div>
                 `;
 
-            /*// Add like functionality
-            document.getElementById('likeButton').addEventListener('click', () => {
-                // Implement like functionality here
-            });*/
             const likeButton = document.getElementById('likeButton');
             initializeLikeButton(postId, likeButton);
         } else {

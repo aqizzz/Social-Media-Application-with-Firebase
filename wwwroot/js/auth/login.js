@@ -37,7 +37,11 @@ form.addEventListener('submit', function (event) {
                         errAlert.textContent = 'An error occurred.';
                         break;
                 }
+
+                form.classList.remove('was-validated');
             });
+
+        return;
     }
 
     form.classList.add('was-validated');
